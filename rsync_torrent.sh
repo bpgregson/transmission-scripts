@@ -5,7 +5,7 @@
 # Leaves the source files in the Transmission download directory to continue seeding.
 # See rm_seeded_torrent.sh to clean the download directory on a cron schedule.
 
-# AUTHOR: <github username> <github-user-url>
+# AUTHOR: bpgregson https://github.com/bpgregson
 
 # USAGE:
 ## Stop transmission-daemon
