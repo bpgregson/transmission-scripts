@@ -1,0 +1,1 @@
+/home/kodi/transmission-scripts/rsync_torrent.sh
