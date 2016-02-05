@@ -3,15 +3,16 @@
 # Script using rsync to copy torrents downloaded by Transmission to a watch directory for
 # post processing immediately upon completion.
 # Leaves the source files in the Transmission download directory to continue seeding.
-# See rm_seeded_torrent.sh to clean the download directory on a cron schedule.
+# See trash_seeded_torrent.sh to clean the download directory on a cron schedule.
 
 # AUTHOR: bpgregson https://github.com/bpgregson
 
 # USAGE:
+## Make this script executable.  See "chmod --help".
 ## Stop transmission-daemon
 ## Edit Transmission .../settings.json
 ## Enable "script-torrent-done-enabled": true,
-## Set "script-torrent-done-filename": /path-to-this-script/cp_torrent.sh
+## Set "script-torrent-done-filename": /path-to-this-script/rsync_torrent.sh
 ## Restart Transmission
 
 #################################################################################
