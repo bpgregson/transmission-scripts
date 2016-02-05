@@ -67,7 +67,7 @@ if [ -f "${SRC_NAME}" ]; then
       printf "$TIMESTAMP $TR_TORRENT_NAME Source size= $SRC_SIZE Destination size= $DEST_SIZE\n" >> $LOG_FILE
     fi
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-  printf "$TIMESTAMP  FINISHED: File $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
+  printf "$TIMESTAMP FINISHED: File $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
 
 # If TR_TORRENT_NAME exists in TR_TORRENT_DIR and is a directory.
 elif [ -d "${SRC_NAME}" ]; then
@@ -82,7 +82,7 @@ elif [ -d "${SRC_NAME}" ]; then
       printf "$TIMESTAMP $TR_TORRENT_NAME Source size= $SRC_SIZE Destination size= $DEST_SIZE\n" >> $LOG_FILE
     fi
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-	printf "$TIMESTAMP  FINISHED: Directory $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
+	printf "$TIMESTAMP FINISHED: Directory $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
 
 # If TR_TORRENT_NAME exists but is neither a regular file nor a directory, send to ERROR_DIR for manual review.
 # TO-DO: Additional string if TR_TORRENT_NAME does not exist.  As-is, will exit without logging.
@@ -91,5 +91,5 @@ else
 	rsync -a "$SRC_NAME" "$ERROR_DIR"
 # TO-DO: Quality control, compare SRC and DEST file sizes before writing to log, as above.
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-	printf "$TIMESTAMP  WARNING: File $TR_TORRENT_NAME copied to $ERROR_DIR\n" >> $LOG_FILE
+	printf "$TIMESTAMP WARNING: File $TR_TORRENT_NAME copied to $ERROR_DIR\n" >> $LOG_FILE
 fi
