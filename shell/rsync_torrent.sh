@@ -62,12 +62,12 @@ if [ -f "${SRC_NAME}" ]; then
   DEST_SIZE="$(stat -c%s "$DEST_DIR/$TR_TORRENT_NAME")"
     if [ $SRC_SIZE != $DEST_SIZE ]; then
       TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-      printf "$TIMESTAMP WARNING: $TR_TORRENT_NAME File size mismatch: Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      printf "$TIMESTAMP WARNING: $TR_TORRENT_NAME File size mismatch: Source size= $SRC_SIZE Destination size= $DEST_SIZE\n" >> $LOG_FILE
     else
-      printf "$TIMESTAMP  $TR_TORRENT_NAME  Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      printf "$TIMESTAMP $TR_TORRENT_NAME Source size= $SRC_SIZE Destination size= $DEST_SIZE\n" >> $LOG_FILE
     fi
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-  printf "$TIMESTAMP FINISHED: File $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
+  printf "$TIMESTAMP  FINISHED: File $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
 
 # If TR_TORRENT_NAME exists in TR_TORRENT_DIR and is a directory.
 elif [ -d "${SRC_NAME}" ]; then
@@ -77,9 +77,9 @@ elif [ -d "${SRC_NAME}" ]; then
   DEST_SIZE="$(du -sb "$DEST_DIR/$TR_TORRENT_NAME" | cut -f1)"
     if [ $SRC_SIZE != $DEST_SIZE ]; then
       TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-      printf "$TIMESTAMP  WARNING: $TR_TORRENT_NAME Directory size mismatch: Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      printf "$TIMESTAMP WARNING: $TR_TORRENT_NAME Directory size mismatch: Source size= $SRC_SIZE Destination size= $DEST_SIZE\n" >> $LOG_FILE
     else
-      printf "$TIMESTAMP  $TR_TORRENT_NAME  Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      printf "$TIMESTAMP $TR_TORRENT_NAME Source size= $SRC_SIZE Destination size= $DEST_SIZE\n" >> $LOG_FILE
     fi
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
 	printf "$TIMESTAMP  FINISHED: Directory $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
