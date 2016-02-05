@@ -50,7 +50,7 @@ SRC_NAME="$TR_TORRENT_DIR/$TR_TORRENT_NAME"
 # start logging
 mkdir -p $LOG_DIR
 TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-printf "$TIMESTAMP  Starting to copy $TR_TORRENT_NAME\n" >> $LOG_FILE
+printf "$TIMESTAMP Starting to copy $TR_TORRENT_NAME\n" >> $LOG_FILE
 
 # START FILE ACTIONS
 
@@ -61,12 +61,13 @@ if [ -f "${SRC_NAME}" ]; then
   SRC_SIZE="$(stat -c%s "$SRC_NAME")"
   DEST_SIZE="$(stat -c%s "$DEST_DIR/$TR_TORRENT_NAME")"
     if [ $SRC_SIZE != $DEST_SIZE ]; then
-      printf "WARNING: $TR_TORRENT_NAME File size mismatch: Source size= $SRC_SIZE    Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
+      printf "$TIMESTAMP WARNING: $TR_TORRENT_NAME File size mismatch: Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
     else
-      printf "$TR_TORRENT_NAME  Source size= $SRC_SIZE    Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      printf "$TIMESTAMP  $TR_TORRENT_NAME  Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
     fi
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
-  printf "$TIMESTAMP  FINISHED: File $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
+  printf "$TIMESTAMP FINISHED: File $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
 
 # If TR_TORRENT_NAME exists in TR_TORRENT_DIR and is a directory.
 elif [ -d "${SRC_NAME}" ]; then
@@ -75,9 +76,10 @@ elif [ -d "${SRC_NAME}" ]; then
   SRC_SIZE="$(du -sb "$SRC_NAME" | cut -f1)"
   DEST_SIZE="$(du -sb "$DEST_DIR/$TR_TORRENT_NAME" | cut -f1)"
     if [ $SRC_SIZE != $DEST_SIZE ]; then
-      printf "WARNING: $TR_TORRENT_NAME Directory size mismatch: Source size= $SRC_SIZE    Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
+      printf "$TIMESTAMP  WARNING: $TR_TORRENT_NAME Directory size mismatch: Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
     else
-      printf "$TR_TORRENT_NAME  Source size= $SRC_SIZE    Destination size= $DEST_SIZE\n" >> $LOG_FILE
+      printf "$TIMESTAMP  $TR_TORRENT_NAME  Source size= $SRC_SIZE  Destination size= $DEST_SIZE\n" >> $LOG_FILE
     fi
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
 	printf "$TIMESTAMP  FINISHED: Directory $TR_TORRENT_NAME copied to $DEST_DIR\n" >> $LOG_FILE
@@ -87,7 +89,7 @@ elif [ -d "${SRC_NAME}" ]; then
 else
 	mkdir -p $ERROR_DIR
 	rsync -a "$SRC_NAME" "$ERROR_DIR"
-# TO-DO: Quality control, compare SRC and DEST file sizes before writing to log.
+# TO-DO: Quality control, compare SRC and DEST file sizes before writing to log, as above.
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
 	printf "$TIMESTAMP  WARNING: File $TR_TORRENT_NAME copied to $ERROR_DIR\n" >> $LOG_FILE
 fi
