@@ -50,8 +50,8 @@ if [ -f "${SRC_NAME}" ]; then
   rsync -a "$SRC_NAME" "$DEST_DIR"
   SRC_SIZE="$(stat -c%s "$SRC_NAME")"
   DEST_SIZE="$(stat -c%s "$DEST_DIR/$TR_TORRENT_NAME")"
+  TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
     if [ $SRC_SIZE != $DEST_SIZE ]; then
-      TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
       printf "$TIMESTAMP WARNING: $TR_TORRENT_NAME File size mismatch: Source size= $SRC_SIZE bytes Destination size= $DEST_SIZE bytes\n" >> $LOG_FILE
     else
       printf "$TIMESTAMP $TR_TORRENT_NAME Source size= $SRC_SIZE bytes Destination size= $DEST_SIZE bytes\n" >> $LOG_FILE
@@ -65,8 +65,8 @@ elif [ -d "${SRC_NAME}" ]; then
 	rsync -a "$SRC_NAME" "$DEST_DIR"
   SRC_SIZE="$(du -sb "$SRC_NAME" | cut -f1)"
   DEST_SIZE="$(du -sb "$DEST_DIR/$TR_TORRENT_NAME" | cut -f1)"
+  TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
     if [ $SRC_SIZE != $DEST_SIZE ]; then
-      TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
       printf "$TIMESTAMP WARNING: $TR_TORRENT_NAME Directory size mismatch: Source size= $SRC_SIZE bytes Destination size= $DEST_SIZE bytes\n" >> $LOG_FILE
     else
       printf "$TIMESTAMP $TR_TORRENT_NAME Source size= $SRC_SIZE bytes Destination size= $DEST_SIZE bytes\n" >> $LOG_FILE
@@ -83,4 +83,3 @@ else
   TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
 	printf "$TIMESTAMP WARNING: File $TR_TORRENT_NAME copied to $ERROR_DIR\n" >> $LOG_FILE
 fi
-
